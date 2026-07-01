@@ -1,0 +1,42 @@
+---
+import SectionTitle from "@/components/SectionTitle.astro";
+
+const steps = [
+  {
+    number: "1",
+    title: "Agenda tu cita",
+    description: "Coordina tu visita previamente para recibir atención ordenada y personalizada.",
+  },
+  {
+    number: "2",
+    title: "Evaluación profesional",
+    description: "Revisamos tu salud oral, tus objetivos y el tratamiento más adecuado para tu caso.",
+  },
+  {
+    number: "3",
+    title: "Plan de tratamiento",
+    description: "Te orientamos con claridad para que sepas qué necesitas, por qué y cuáles son los siguientes pasos.",
+  },
+];
+---
+
+<section class="section-pad bg-white">
+  <div class="container-page">
+    <SectionTitle
+      eyebrow="Tu experiencia"
+      title="Así se siente cuidar tu sonrisa con SmileUp."
+      align="center"
+    />
+    <div class="mt-12 grid gap-6 sm:grid-cols-3">
+      {steps.map((step) => (
+        <div class="card p-6">
+          <span class="grid h-10 w-10 place-items-center rounded-full bg-sage font-display text-lg font-semibold text-white">
+            {step.number}
+          </span>
+          <h3 class="mt-4 font-display text-xl font-semibold text-ink">{step.title}</h3>
+          <p class="mt-2 text-sm leading-6 text-cocoa">{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

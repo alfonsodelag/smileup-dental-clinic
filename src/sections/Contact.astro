@@ -1,0 +1,76 @@
+---
+import SectionTitle from "@/components/SectionTitle.astro";
+import { services } from "@/content/services";
+import { siteConfig, whatsappUrl } from "@/config/site";
+
+const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
+---
+
+<section id="contacto" class="section-pad bg-shell">
+  <div class="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+    <div>
+      <SectionTitle
+        eyebrow="Agenda"
+        title="Reserva una evaluación o solicita más información."
+        intro="Completa el formulario y te contactamos para confirmar tu cita. También puedes escribirnos por WhatsApp para una respuesta más rápida."
+      />
+      <div class="mt-8 space-y-3 text-sm leading-6 text-cocoa">
+        <p>
+          <strong class="text-ink">Teléfono / WhatsApp:</strong>{" "}
+          <a class="hover:text-sage transition-colors" href={whatsappUrl}>{siteConfig.phone}</a>
+        </p>
+        <p><strong class="text-ink">Email:</strong> {siteConfig.email}</p>
+        <p>
+          <strong class="text-ink">Ubicación:</strong>{" "}
+          <a class="hover:text-sage transition-colors" href={siteConfig.mapsUrl} target="_blank" rel="noopener">
+            {siteConfig.address}
+          </a>
+        </p>
+        <div>
+          <strong class="text-ink">Horario:</strong>
+          <ul class="mt-1 space-y-0.5 pl-0">
+            <li>{siteConfig.hours.weekdays}</li>
+            {siteConfig.hours.saturday && <li>{siteConfig.hours.saturday}</li>}
+            {siteConfig.hours.sunday && <li class="text-ink/50">{siteConfig.hours.sunday}</li>}
+            {siteConfig.hours.emergency && <li class="text-ink/70">{siteConfig.hours.emergency}</li>}
+          </ul>
+        </div>
+        <p class="font-semibold text-sage">{siteConfig.appointmentNote}</p>
+      </div>
+      <a class="btn-primary mt-8" href={whatsappUrl} target="_blank" rel="noopener">Escribir por WhatsApp</a>
+
+      <div class="mt-8 overflow-hidden rounded-2xl border border-borderc shadow-soft">
+        <iframe
+          class="h-64 w-full"
+          src={siteConfig.mapsEmbedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title={`Ubicación de ${siteConfig.businessName}`}
+        ></iframe>
+      </div>
+    </div>
+
+    <form class="card grid gap-4 p-6" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value={web3formsKey ?? ""} />
+      <input type="hidden" name="subject" value={`Nueva consulta desde ${siteConfig.businessName}`} />
+      <input class="rounded-md border border-borderc px-4 py-3 text-sm focus:border-sage focus:ring-sage" type="text" name="name" placeholder="Nombre" required />
+      <div class="grid gap-4 sm:grid-cols-2">
+        <input class="rounded-md border border-borderc px-4 py-3 text-sm focus:border-sage focus:ring-sage" type="tel" name="phone" placeholder="Teléfono / WhatsApp" required />
+        <input class="rounded-md border border-borderc px-4 py-3 text-sm focus:border-sage focus:ring-sage" type="email" name="email" placeholder="Email (opcional)" />
+      </div>
+      <select class="rounded-md border border-borderc px-4 py-3 text-sm text-cocoa focus:border-sage focus:ring-sage" name="treatment" required>
+        <option value="">Servicio de interés</option>
+        {services.map((service) => <option value={service.title}>{service.title}</option>)}
+      </select>
+      <input class="rounded-md border border-borderc px-4 py-3 text-sm focus:border-sage focus:ring-sage" type="text" name="preferred_time" placeholder="Preferencia de horario (opcional)" />
+      <textarea class="min-h-36 rounded-md border border-borderc px-4 py-3 text-sm focus:border-sage focus:ring-sage" name="message" placeholder="Cuéntanos qué necesitas" required></textarea>
+      {!web3formsKey && (
+        <p class="rounded-md bg-rose/10 px-4 py-3 text-sm text-cocoa">
+          Configura PUBLIC_WEB3FORMS_ACCESS_KEY en Vercel o en tu archivo .env local.
+        </p>
+      )}
+      <button class="btn-primary" type="submit">Enviar solicitud</button>
+      <p class="text-center text-xs text-cocoa">{siteConfig.appointmentNote}</p>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import WhyChooseSmileUp from "@/sections/WhyChooseSmileUp.astro";
+import Contact from "@/sections/Contact.astro";
+---
+
+<BaseLayout
+  title="Nosotros | SmileUp Dental Clinic"
+  description="SmileUp Dental Clinic es una clínica dental en Panamá orientada a la odontología moderna, estética y cercana, con atención previa cita y planes de tratamiento personalizados."
+>
+  <section class="section-pad bg-white">
+    <div class="container-page grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <SectionTitle
+          eyebrow="Nosotros"
+          title="Odontología moderna, estética y cercana para cuidar tu sonrisa."
+          intro="En SmileUp Dental Clinic combinamos criterio profesional y atención personalizada para acompañarte en cada etapa del cuidado de tu salud oral."
+        />
+        <p class="mt-6 text-base leading-8 text-cocoa">
+          Cada paciente recibe una evaluación previa y un plan de tratamiento claro, pensado para sus necesidades específicas. La atención se realiza siempre previa cita, para que cada visita sea ordenada y sin esperas innecesarias.
+        </p>
+        <p class="mt-4 text-base leading-8 text-cocoa">
+          Nuestro equipo clínico: <strong class="text-ink">[NOMBRE DE DOCTORES PENDIENTE]</strong>.
+        </p>
+      </div>
+      <img
+        class="h-[34rem] w-full rounded-lg object-cover shadow-soft"
+        src="/images/about-video.jpg"
+        alt="Atención odontológica moderna y personalizada en SmileUp Dental Clinic"
+      />
+    </div>
+  </section>
+  <WhyChooseSmileUp />
+  <Contact />
+</BaseLayout>

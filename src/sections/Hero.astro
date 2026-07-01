@@ -1,0 +1,50 @@
+---
+import Button from "@/components/Button.astro";
+import { whatsappUrl, siteConfig } from "@/config/site";
+---
+
+<section class="relative overflow-hidden bg-white">
+  <div class="absolute inset-y-0 right-0 hidden w-1/2 bg-shell lg:block"></div>
+  <div class="container-page relative grid min-h-[calc(100vh-5rem)] items-center gap-12 py-14 lg:grid-cols-[0.95fr_1.05fr] lg:py-20">
+    <div class="max-w-2xl">
+      <p class="eyebrow">SmileUp Dental Clinic · Panamá</p>
+      <h1 class="mt-4 font-display text-5xl font-semibold leading-tight text-ink sm:text-6xl">
+        Cuida tu sonrisa con atención dental moderna y cercana
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-cocoa">
+        En SmileUp Dental Clinic ofrecemos atención odontológica profesional, estética y personalizada para ayudarte a mantener una sonrisa saludable, funcional y segura.
+      </p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <Button href={whatsappUrl} label="Escribir por WhatsApp" />
+        <Button href="/contact" label="Agendar cita" variant="secondary" />
+        <Button href="/services" label="Ver servicios" variant="secondary" />
+      </div>
+      <p class="mt-5 text-sm font-semibold text-sage">{siteConfig.appointmentNote}</p>
+      <dl class="mt-10 grid grid-cols-3 gap-4 border-t border-borderc pt-8">
+        <div>
+          <dt class="font-display text-lg font-semibold text-ink">Previa cita</dt>
+          <dd class="mt-1 text-xs uppercase tracking-[0.12em] text-cocoa">Atención ordenada</dd>
+        </div>
+        <div>
+          <dt class="font-display text-lg font-semibold text-ink">Personalizada</dt>
+          <dd class="mt-1 text-xs uppercase tracking-[0.12em] text-cocoa">Plan por paciente</dd>
+        </div>
+        <div>
+          <dt class="font-display text-lg font-semibold text-ink">Integral</dt>
+          <dd class="mt-1 text-xs uppercase tracking-[0.12em] text-cocoa">Servicios completos</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="relative">
+      <img
+        class="h-[36rem] w-full rounded-lg object-cover shadow-soft"
+        src="/images/hero-bg.jpg"
+        alt="Atención odontológica moderna y personalizada en SmileUp Dental Clinic"
+      />
+      <div class="absolute bottom-6 left-6 max-w-xs rounded-lg bg-white/92 p-5 shadow-soft backdrop-blur">
+        <p class="text-sm font-semibold text-ink">Evaluación profesional</p>
+        <p class="mt-2 text-sm leading-6 text-cocoa">Revisamos tu salud oral y diseñamos un plan de tratamiento claro para tu caso.</p>
+      </div>
+    </div>
+  </div>
+</section>
