@@ -1,16 +1,20 @@
-import type { SanityBlock } from "./sanity";
+import { dentalPostFallbackImages, type SanityBlock, type SanityPost } from "./sanity";
 
-const FALLBACK_BLOG_IMAGES = [
-  "/images/blog/blog-1.jpg",
-  "/images/blog/blog-2.jpg",
-  "/images/blog/blog-3.jpg",
-  "/images/blog/blog-4.jpg",
-  "/images/blog/blog-5.jpg",
-  "/images/blog/blog-6.jpg",
+// Último recurso genérico para posts dentales que no tengan mainImage en
+// Sanity ni una entrada en dentalPostFallbackImages (p. ej. artículos nuevos
+// agregados en Studio antes de subirles imagen).
+const GENERIC_DENTAL_FALLBACK_IMAGES = [
+  "/images/hero-bg.jpg",
+  "/images/about-video.jpg",
+  "/images/contact-pic.jpg",
 ];
 
 export function getFallbackImage(index: number): string {
-  return FALLBACK_BLOG_IMAGES[index % FALLBACK_BLOG_IMAGES.length];
+  return GENERIC_DENTAL_FALLBACK_IMAGES[index % GENERIC_DENTAL_FALLBACK_IMAGES.length];
+}
+
+export function getPostImage(post: Pick<SanityPost, "slug" | "imageUrl">, index: number): string {
+  return post.imageUrl || dentalPostFallbackImages[post.slug] || getFallbackImage(index);
 }
 
 export function formatDate(dateStr: string): string {

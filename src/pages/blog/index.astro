@@ -3,7 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import SectionTitle from "@/components/SectionTitle.astro";
 import Contact from "@/sections/Contact.astro";
 import { sanityClient, blogPostsQuery, blogPostsParams, type SanityPost } from "@/lib/sanity";
-import { getFallbackImage, formatDate } from "@/lib/portableText";
+import { getPostImage, formatDate } from "@/lib/portableText";
 
 let posts: SanityPost[] = [];
 try {
@@ -31,7 +31,7 @@ try {
               <div class="overflow-hidden">
                 <img
                   class="h-52 w-full object-cover transition duration-300 group-hover:scale-105"
-                  src={getFallbackImage(i)}
+                  src={getPostImage(post, i)}
                   alt={post.title}
                   loading="lazy"
                 />

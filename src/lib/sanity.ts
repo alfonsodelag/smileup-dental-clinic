@@ -45,12 +45,24 @@ const dentalPostSlugs = [
   "odontopediatria-cuidado-infantil",
 ];
 
+// Ninguno de estos posts tiene todavía mainImage cargado en Sanity Studio (el
+// dataset es compartido y ese campo quedó vacío). Mientras no se suba una
+// imagen real por post en el Studio, se usa esta imagen de respaldo temática
+// por slug; en cuanto el post tenga mainImage, la query la trae automáticamente
+// y esta tabla deja de usarse para ese post.
+export const dentalPostFallbackImages: Record<string, string> = {
+  "implantes-oseointegrados": "/images/blog/implantes-oseointegrados.jpg",
+  "odontologia-digital": "/images/blog/odontologia-digital.jpg",
+  "odontopediatria-cuidado-infantil": "/images/blog/odontopediatria-cuidado-infantil.jpg",
+};
+
 export const blogPostsQuery = `*[_type == "post" && slug.current in $slugs] | order(publishedAt desc) {
   title,
   "slug": slug.current,
   excerpt,
   publishedAt,
-  readTime
+  readTime,
+  "imageUrl": mainImage.asset->url
 }`;
 
 export const blogPostsParams = { slugs: dentalPostSlugs };
@@ -61,7 +73,8 @@ export const blogPostBySlugQuery = `*[_type == "post" && slug.current in $slugs 
   excerpt,
   publishedAt,
   readTime,
-  body
+  body,
+  "imageUrl": mainImage.asset->url
 }`;
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -72,6 +85,7 @@ export type SanityPost = {
   publishedAt: string;
   readTime?: string | number;
   body?: SanityBlock[];
+  imageUrl?: string | null;
 };
 
 export type SanityBlock = {
